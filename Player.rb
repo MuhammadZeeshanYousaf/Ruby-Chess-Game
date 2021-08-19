@@ -1,4 +1,5 @@
 class Player
+
   def initialize name, is_color_white
     @name = name
     @is_white = is_color_white
@@ -24,4 +25,5 @@ class Player
   def to_s
     @name
   end
+
 end

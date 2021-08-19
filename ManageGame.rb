@@ -1,8 +1,9 @@
 class ManageGame
+
   GAMES_DIR = "./Saved Games"
 
   #game_name = string, chess_object = Chess
-  def self.save_game game_name, chess_object
+  def save_game game_name, chess_object
     #get necessary information
     player1 = chess_object.get_players[0]
     player2 = chess_object.get_players[1]
@@ -16,7 +17,7 @@ class ManageGame
   end
 
   #returns array [chess_board, player1, player2]
-  def self.continue_game game_name
+  def continue_game game_name
     #read from file
     if exist? game_name
       saved_game_file = File.open(filepath game_name, "r")
@@ -31,11 +32,11 @@ class ManageGame
     end
   end
 
-  def self.delete_game game_name
+  def delete_game game_name
     exist?(game_name)? File.delete(filepath game_name) : false
   end
 
-  def self.exist? game_name
+  def exist? game_name
     unless Dir.exist? GAMES_DIR
       Dir.mkdir GAMES_DIR
     end
@@ -43,7 +44,7 @@ class ManageGame
   end
 
   #player objects in params
-  def reset_game chess_obj, player1, player2
+  def new_game chess_obj, player1, player2
     chess_obj = Chess.new player1, player2
   end
 
@@ -51,4 +52,5 @@ class ManageGame
     "#{GAMES_DIR}/#{game_name}.txt"
   end
   private :filepath
+
 end

@@ -1,6 +1,18 @@
-require '../ChessPiece'
+require_relative 'ChessPiece'
 
 class Queen < ChessPiece
-  B = "Q-b"
-  W = "Q-w"
+
+  def initialize is_white
+    super is_white
+  end
+
+  #override
+  def w; "Q-w"; end
+
+  def b; "Q-b"; end
+
+  def valid_move? from, to, player
+    #definition
+  end
+
 end

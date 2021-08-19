@@ -1,5 +1,5 @@
 require_relative 'Chess'
-require_relative 'ChessPiece'
+require_relative 'Chess Pieces/ChessPiece'
 Dir["#{File.dirname(__FILE__)}/Chess\sPieces/*.rb"].each {|file| require_relative file }
 
 puts "Welcome to Chess Game!"

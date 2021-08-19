@@ -21,6 +21,7 @@ class ConsoleInterface
       puts "--------------"
   end
 
+=begin
   def process_user_input
     case gets.chomp.to_s
     when '1'
@@ -34,4 +35,6 @@ class ConsoleInterface
       puts "Invalid Input!"
     end
   end
+=end
+
 end
