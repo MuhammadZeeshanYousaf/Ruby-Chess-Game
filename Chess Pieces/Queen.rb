@@ -2,7 +2,7 @@ require_relative 'ChessPiece'
 
 class Queen < ChessPiece
 
-  def initialize is_white
+  def initialize(is_white)
     super is_white
   end
 
@@ -11,16 +11,12 @@ class Queen < ChessPiece
 
   def b; "Q-b"; end
 
-  def valid_move? from, to
+  def valid_move?(from, to)
     Bishop.new(@is_white).valid_move?(from, to) or Rook.new(@is_white).valid_move?(from, to)
   end
 
-  def can_move from, to, board
+  def can_move(from, to, board) end
 
-  end
-
-  def move_to from, to, board
-
-  end
+  def move_to(from, to, board) end
 
 end
