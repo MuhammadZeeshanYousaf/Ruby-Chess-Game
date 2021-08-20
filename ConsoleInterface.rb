@@ -4,12 +4,14 @@ class ConsoleInterface
     (1..8).each { |i| ; print "     #{i}"; }
 
     puts  #line break in console
-    @chess_board.each do |element|
-      print "#{element[0]} | "
-      (1...(element.length)).each { |i|
-        print element[i], " : "
+    char = 'a'
+    @chess_board.each do |row|
+      print "#{char} | "
+      (0...(row.length)).each { |i|
+        print row[i], " : "
       }
       puts "\b\b |"
+      char.next!
     end
   end
 

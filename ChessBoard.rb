@@ -6,14 +6,14 @@ class ChessBoard
     @black = pieces false
     @blank = ChessPiece.new(true).blank
     @chess_board = [    #2D array
-      ['a', @white[:r], @white[:p], @blank, @blank, @blank, @blank, @black[:p], @black[:r]],
-      ['b', @white[:n], @white[:p], @blank, @blank, @blank, @blank, @black[:p], @black[:n]],
-      ['c', @white[:b], @white[:p], @blank, @blank, @blank, @blank, @black[:p], @black[:b]],
-      ['d', @white[:q], @white[:p], @blank, @blank, @blank, @blank, @black[:p], @black[:q]],
-      ['e', @white[:k], @white[:p], @blank, @blank, @blank, @blank, @black[:p], @black[:r]],
-      ['f', @white[:b], @white[:p], @blank, @blank, @blank, @blank, @black[:p], @black[:b]],
-      ['g', @white[:n], @white[:p], @blank, @blank, @blank, @blank, @black[:p], @black[:n]],
-      ['h', @white[:r], @white[:p], @blank, @blank, @blank, @blank, @black[:p], @black[:r]]
+      [@white[:r], @white[:p], @blank, @blank, @blank, @blank, @black[:p], @black[:r]], # a
+      [@white[:n], @white[:p], @blank, @blank, @blank, @blank, @black[:p], @black[:n]], # b
+      [@white[:b], @white[:p], @blank, @blank, @blank, @blank, @black[:p], @black[:b]], # c
+      [@white[:q], @white[:p], @blank, @blank, @blank, @blank, @black[:p], @black[:q]], # d
+      [@white[:k], @white[:p], @blank, @blank, @blank, @blank, @black[:p], @black[:k]], # e
+      [@white[:b], @white[:p], @blank, @blank, @blank, @blank, @black[:p], @black[:b]], # f
+      [@white[:n], @white[:p], @blank, @blank, @blank, @blank, @black[:p], @black[:n]], # g
+      [@white[:r], @white[:p], @blank, @blank, @blank, @blank, @black[:p], @black[:r]]  # h
     ]
   end
 

@@ -11,8 +11,16 @@ class Pawn < ChessPiece
 
   def b; "P-b"; end
 
-  def valid_move? from, to, player
-    #definition
+  def valid_move? from, to
+
+  end
+
+  def can_move from, to, board
+
+  end
+
+  def move_to from, to, board
+
   end
 
 end
