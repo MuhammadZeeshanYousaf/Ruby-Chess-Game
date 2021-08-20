@@ -11,17 +11,14 @@ class Pawn < ChessPiece
 
   def b; "P-b"; end
 
-  def valid_move? from, to, is_first_turn
+  def valid_move? from, to #, is_first_turn
     if validate_pos(from, to)
-      x_axis_from = from[0].ord - 96
-      y_axis_from = from[1].to_i
-      x_axis_to = to[0].ord - 96
-      y_axis_to = to[1].to_i
-      if valid_axis?(x_axis_from, y_axis_from, x_axis_to, y_axis_to)
-        if (3..8).include?(y_axis_from + 1)
-          return (y_axis_from + 1) == y_axis_to
-        elsif y_axis_from == 2 and is_first_turn == true
-            return (y_axis_from + 1) == y_axis_to or (y_axis_from + 2) == y_axis_to
+      axis = get_axis from, to
+      if valid_axis?(axis[:x_from], axis[:y_from], axis[:x_to], axis[:y_to])
+        if (3..8).include?(axis[:y_from] + 1)
+          return (axis[:y_from] + 1) == axis[:y_to]
+        elsif axis[:y_from] == 2 #and is_first_turn == true
+            return (axis[:y_from] + 1) == axis[:y_to] || (axis[:y_from] + 2) == axis[:y_to]
         else
           return false
         end

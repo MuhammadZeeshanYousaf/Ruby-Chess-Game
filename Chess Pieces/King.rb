@@ -13,19 +13,16 @@ class King < ChessPiece
 
   def valid_move? from, to
     if validate_pos(from, to)
-      x_axis_from = from[0].ord - 96
-      y_axis_from = from[1].to_i
-      x_axis_to = to[0].ord - 96
-      y_axis_to = to[1].to_i
-      if valid_axis?(x_axis_from, y_axis_from, x_axis_to, y_axis_to)
+      axis = get_axis from, to  #get axis from string input (e.g, from = "e4")
+      if valid_axis?(axis[:x_from], axis[:y_from], axis[:x_to], axis[:y_to])
         #All possible coordinates positions
         x = [1, -1, 0,  0, 1, -1, -1, 1]
         y = [0,  0, 1, -1, 1, -1, 1, -1]
         for i in 0...(x.length)
-          test_x = x_axis_from + x[i]
-          test_y = y_axis_from + y[i]
+          test_x = axis[:x_from] + x[i]
+          test_y = axis[:y_from] + y[i]
           if valid_axis?(test_x, test_y)
-            if test_x == x_axis_to and test_y == y_axis_to
+            if test_x == axis[:x_to] and test_y == axis[:y_to]
               return true
             end
           end
