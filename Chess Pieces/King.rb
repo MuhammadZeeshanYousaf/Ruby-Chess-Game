@@ -13,7 +13,7 @@ class King < ChessPiece
 
   def valid_move?(from, to)
     if validate_pos(from, to)
-      axis = get_axis from, to #get axis from string input (e.g, from = "e4")
+      axis = get_axis from, to  #get axis from string input (e.g, from = "e4")
       if valid_axis?(axis[:x_from], axis[:y_from], axis[:x_to], axis[:y_to])
         #All possible coordinates positions
         x = [1, -1, 0, 0, 1, -1, -1, 1]
