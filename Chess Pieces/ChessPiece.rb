@@ -53,20 +53,12 @@ class ChessPiece
     true
   end
 
-  def get_axis(from, to)
-    x_axis_from = from[0].ord - 96
-    y_axis_from = from[1].to_i
-    x_axis_to = to[0].ord - 96
-    y_axis_to = to[1].to_i
-    { x_from: x_axis_from, y_from: y_axis_from, x_to: x_axis_to, y_to: y_axis_to }
-  end
-
   def get_axis from, to
     x_axis_from = from[0].ord - 96
     y_axis_from = from[1].to_i
     x_axis_to = to[0].ord - 96
     y_axis_to = to[1].to_i
-    return {x_from: x_axis_from, y_from: y_axis_from, x_to: x_axis_to, y_to: y_axis_to}
+    {x_from: x_axis_from, y_from: y_axis_from, x_to: x_axis_to, y_to: y_axis_to}
   end
 
 end
