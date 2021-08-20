@@ -12,7 +12,7 @@ class Queen < ChessPiece
   def b; "Q-b"; end
 
   def valid_move? from, to
-
+    Bishop.new(@is_white).valid_move?(from, to) or Rook.new(@is_white).valid_move?(from, to)
   end
 
   def can_move from, to, board

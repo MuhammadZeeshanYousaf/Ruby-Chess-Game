@@ -1,6 +1,7 @@
 require_relative 'ChessPiece'
 
 class Bishop < ChessPiece
+
   def initialize is_white
     super is_white
   end
