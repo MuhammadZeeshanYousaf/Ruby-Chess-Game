@@ -10,8 +10,6 @@ class Chess
     @load_game = ManageGame.new
   end
 
-  #--------------------methods
-
   #move_string ( e.g. p=e2:e4 )
   def move_piece(move_string, player_name)
     if move_string =~ /^\s*[prnbqk]\s*=\s*[a-h][1-8]\s*:\s*[a-h][1-8]$/i
@@ -61,21 +59,20 @@ class Chess
   def get_players
     [@player1, @player2]
   end
-  # -------------------end
 
   #class methods
   def self.require_piece(piece_name)
-    require_relative 'Chess Pieces/' + piece_name
+    require_relative 'Chess_Pieces/' + piece_name
   end
 
   def self.require_all_pieces
-    require_piece 'ChessPiece'
-    require_piece 'Pawn'
-    require_piece 'Rook'
-    require_piece 'Knight'
-    require_piece 'Bishop'
-    require_piece 'Queen'
-    require_piece 'King'
+    self.require_piece 'ChessPiece'
+    self.require_piece 'Pawn'
+    self.require_piece 'Rook'
+    self.require_piece 'Knight'
+    self.require_piece 'Bishop'
+    self.require_piece 'Queen'
+    self.require_piece 'King'
   end
 
 end

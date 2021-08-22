@@ -17,6 +17,4 @@ class Queen < ChessPiece
 
   def can_move(from, to, board) end
 
-  def move_to(from, to, board) end
-
 end

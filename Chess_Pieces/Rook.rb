@@ -30,11 +30,8 @@ class Rook < ChessPiece
     end
   end
 
-  def can_move from, to, board
-
-  end
-
-  def move_to from, to, board
+  #return attacked piece or nil or false
+  def can_move(from, to, board)
 
   end
 
