@@ -2,7 +2,8 @@ require_relative 'ChessPiece'
 
 class Knight < ChessPiece
 
-  def initialize is_white
+  # @param [Boolean] is_white
+  def initialize(is_white)
     super is_white
   end
 
@@ -29,16 +30,17 @@ class Knight < ChessPiece
         end
         #if no axis match in loop then return false
         return false
-      else
-        return false
-      end
+      else; return false; end
     else
       false
     end
   end
 
-  def can_move(from, to, board) end
-
-  def move_to(from, to, board) end
+  def can_move(from, to, board)
+    super(from, to, board) do |from, to, board, dest_box_piece|
+      move_to from, to, board
+      dest_box_piece
+    end
+  end
 
 end
