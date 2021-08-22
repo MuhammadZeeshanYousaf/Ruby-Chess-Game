@@ -1,7 +1,16 @@
+#get all chess pieces
+require_relative 'Chess_Pieces/ChessPiece'
+require_relative 'Chess_Pieces/Pawn'
+require_relative 'Chess_Pieces/Bishop'
+require_relative 'Chess_Pieces/Rook'
+require_relative 'Chess_Pieces/King'
+require_relative 'Chess_Pieces/Queen'
+require_relative 'Chess_Pieces/Knight'
+
 class ChessBoard
   
   def initialize
-    Chess.require_all_pieces
+    #Chess.require_all_pieces
     @white = pieces true
     @black = pieces false
     @blank = ChessPiece.blank
@@ -42,5 +51,3 @@ class ChessBoard
   end
 
 end
-
-obj = ChessBoard.new.get_board

@@ -2,22 +2,22 @@ class ManageGame
 
   GAMES_DIR = "./Saved Games"
 
-  #game_name = string, chess_object = Chess
-  def save_game game_name, chess_object
+  # @param [ChessBoard] chess_board
+  def export_game(game_name, players, chess_board)
     #get necessary information
-    player1 = chess_object.get_players[0]
-    player2 = chess_object.get_players[1]
+    player1 = players.get_players[0]
+    player2 = players.get_players[1]
     Dir.mkdir GAMES_DIR
     filepath = "#{GAMES_DIR}/#{game_name}.txt"
 
     #make file and save game
     game_file = File.new(filepath, "w+")
-    game_file.syswrite("#{chess_object.get_active_board}\n#{player1},#{player2}")
+    game_file.syswrite("#{chess_board.get_board}\n#{player1.to_s},#{player2.to_s}")
     game_file.close
   end
 
   #returns array [chess_board, player1, player2]
-  def continue_game game_name
+  def import_game(game_name)
     #read from file
     if exist? game_name
       saved_game_file = File.open(filepath game_name, "r")
@@ -28,7 +28,8 @@ class ManageGame
       player1 = Player.new players[0], true
       player2 = Player.new players[1], false
       [chess_board, player1, player2]
-    else nil
+    else
+      nil
     end
   end
 

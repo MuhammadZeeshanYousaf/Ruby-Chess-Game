@@ -1,17 +1,30 @@
+require_relative 'Player'
+require_relative 'ConsoleInterface'
+require_relative 'ChessBoard'
+require_relative 'ManageGame'
+#get all chess pieces
+require_relative 'Chess_Pieces/ChessPiece'
+require_relative 'Chess_Pieces/Pawn'
+require_relative 'Chess_Pieces/Bishop'
+require_relative 'Chess_Pieces/Rook'
+require_relative 'Chess_Pieces/King'
+require_relative 'Chess_Pieces/Queen'
+require_relative 'Chess_Pieces/Knight'
+
 class Chess
 
   def initialize(white_player_name, black_player_name)
     #Player Class objects
     @white_player = Player.new(white_player_name, true)
     @black_player = Player.new(black_player_name, false)
-    self.require_all_pieces
+    #Chess.require_all_pieces
     @console = ConsoleInterface.new
     @board = ChessBoard.new
     @load_game = ManageGame.new
   end
 
   #move_string ( e.g. p=e2:e4 )
-  def move_piece(move_string, player_name)
+  def move_piece(move_string, player_name, first_turn = false)
     if move_string =~ /^\s*[prnbqk]\s*=\s*[a-h][1-8]\s*:\s*[a-h][1-8]$/i
       #input is valid now
       piece_positions = move_string.split("=")
@@ -24,9 +37,13 @@ class Chess
       else
         return false
       end
+
+      is_pawn = false
+
       case piece_positions[0].downcase
       when 'p'
-        piece_to_move = Pawn.new piece_to_move.white?
+        pawn_move = Pawn.new piece_to_move.white?
+        is_pawn = true
       when 'r'
         piece_to_move = Rook.new piece_to_move.white?
       when 'n'
@@ -40,10 +57,25 @@ class Chess
       else
         false
       end
-      piece_to_move.valid_move? from, to
+      if is_pawn
+        piece_to_move.can_move? prev_new_pos[0], prev_new_pos[1], @board, first_turn
+      else
+        piece_to_move.can_move? prev_new_pos[0], prev_new_pos[1], @board
+      end
+      #------------
     else
       false
     end
+  end
+
+
+  def save_game(game_name)
+    @load_game.export_game game_name, get_players, @board
+  end
+
+  def load_game(game_name)
+    @load_game.import_game game_name
+    # to define -------
   end
 
   def reset_game
@@ -57,7 +89,12 @@ class Chess
 
   #accessor methods
   def get_players
-    [@player1, @player2]
+    [@white_player, @black_player]
+  end
+
+  def show_console player
+    @console.display_board @board
+    @console.show_menu player
   end
 
   #class methods

@@ -91,4 +91,7 @@ class ChessPiece
     { x_from: x_axis_from, y_from: y_axis_from, x_to: x_axis_to, y_to: y_axis_to }
   end
 
+  def to_s
+    @is_white ? w : b
+  end
 end

@@ -61,11 +61,15 @@ class Rook < ChessPiece
       y_axis_diff = y_to - y_from
       if y_axis_diff.positive?    #if vertically up move
         1.upto(y_axis_diff) do |i|
-          board.get_box(x_from, y_from + i).eql?(ChessPiece.blank) ? next : return false
+          unless board.get_box(x_from, y_from + i).eql?(ChessPiece.blank)
+            return false
+          end
         end
       else                        #if vertically down move
         -1.downto(y_axis_diff) do |i|
-          board.get_box(x_from, y_from + i).eql?(ChessPiece.blank) ? next : return false
+          unless board.get_box(x_from, y_from + i).eql?(ChessPiece.blank)
+            return false
+          end
         end
       end
     elsif y_from.eql? y_to        #if horizotal move
@@ -73,11 +77,15 @@ class Rook < ChessPiece
       x_axis_diff = x_to - x_from
       if x_axis_diff.positive?    #if horizontly right move
         1.upto(x_axis_diff) do |i|
-          board.get_box(x_from + i, y_from).eql?(ChessPiece.blank) ? next : return false
+          unless board.get_box(x_from + i, y_from).eql?(ChessPiece.blank)
+            return false
+          end
         end
       else                        #if horizontly left move
         -1.downto(x_axis_diff) do |i|
-          board.get_box(x_from + i, y_from).eql?(ChessPiece.blank) ? next : return false
+          unless board.get_box(x_from + i, y_from).eql?(ChessPiece.blank)
+            return false
+          end
         end
       end
     else; false; end

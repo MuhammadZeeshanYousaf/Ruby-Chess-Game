@@ -1,11 +1,12 @@
 class ConsoleInterface
 
-  def display_board chess_board
+  # @param [ChessBoard] chess_board
+  def display_board(chess_board)
     (1..8).each { |i| ; print "     #{i}"; }
 
     puts  #line break in console
     char = 'a'
-    @chess_board.each do |row|
+    (chess_board.get_board).each do |row|
       print "#{char} | "
       (0...(row.length)).each { |i|
         print row[i], " : "
@@ -15,12 +16,12 @@ class ConsoleInterface
     end
   end
 
-  def show_menue player
-      puts "\n (Its #{player.upcase}'s Turn)"
-      puts "1. Make Move"
-      puts "2. Save Game"
-      puts "3. Reset Game"
-      puts "--------------"
+  def show_menu(player)
+    puts "\n (Its #{player.upcase}'s Turn)"
+    puts "1. Make Move"
+    puts "2. Save Game"
+    puts "3. Reset Game"
+    puts "--------------"
   end
 
 =begin
