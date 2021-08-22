@@ -37,8 +37,8 @@ class Knight < ChessPiece
   end
 
   def can_move(from, to, board)
-    super(from, to, board) do |from, to, board, dest_box_piece|
-      move_to from, to, board
+    super(from, to, board) do |_from, _to, _board, dest_box_piece|
+      move_to _from, _to, _board
       dest_box_piece
     end
   end
