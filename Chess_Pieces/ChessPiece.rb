@@ -25,14 +25,13 @@ class ChessPiece
             move_to from, to, board
             dest_box_piece
           end
-        else; false; end
+        end
       elsif !move_status.eql? "attack"
         move_to from, to, board
         nil
-      else; false; end
-    elsif move_status.eql? "attack"
-
-    else; false; end
+      end
+    end
+    false
   end
 
   #defined methods

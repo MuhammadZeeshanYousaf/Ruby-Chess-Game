@@ -26,11 +26,7 @@ class Bishop < ChessPiece
     end
   end
 
-  def can_move from, to, board
-
-  end
-
-  def move_to from, to, board
+  def can_move? from, to, board
 
   end
 
