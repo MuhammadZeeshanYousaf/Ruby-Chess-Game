@@ -30,16 +30,18 @@ class Chess
       piece_positions = move_string.split("=")
       prev_new_pos = piece_positions[1].split(":")
 
-      if @player1.to_s.eql? player_name
-        piece_to_move = ChessPiece.new @player1.white?
-      elsif @player2.to_s.eql? player_name
-        piece_to_move = ChessPiece.new @player2.white?
+      #get piece color to move
+      if @white_player.to_s.eql? player_name
+        piece_to_move = ChessPiece.new @white_player.white?
+      elsif @black_player.to_s.eql? player_name
+        piece_to_move = ChessPiece.new @black_player.white?
       else
         return false
       end
 
-      is_pawn = false
+      is_pawn = false   #check if pawn is the piece to move
 
+      #get the piece to move
       case piece_positions[0].downcase
       when 'p'
         pawn_move = Pawn.new piece_to_move.white?
@@ -57,15 +59,21 @@ class Chess
       else
         false
       end
+
+      #start moving piece process
       if is_pawn
-        piece_to_move.can_move? prev_new_pos[0], prev_new_pos[1], @board, first_turn
+        move_status = pawn_move.can_move? prev_new_pos[0], prev_new_pos[1], @board, first_turn
       else
-        piece_to_move.can_move? prev_new_pos[0], prev_new_pos[1], @board
+        move_status = piece_to_move.can_move? prev_new_pos[0], prev_new_pos[1], @board
       end
-      #------------
-    else
-      false
-    end
+      if move_status == false
+        puts  "CANNOT MOVE PIECE"
+      elsif move_status == nil
+        puts "PIECE MOVED WITHOUT ANY ATTACK"
+      else
+        puts "PIECE MOVED BY ATTACKING ON #{move_status.to_s}"
+      end
+    else; false; end
   end
 
 

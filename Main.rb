@@ -1,15 +1,19 @@
+require 'rubygems'
 require_relative 'Chess'
 #Dir["#{File.dirname(__FILE__)}/Chess\sPieces/*.rb"].each {|file| require_relative file }
 
 puts "Welcome to Chess Game!"
 print " - Enter Player-name for White: "
 first_player = gets.chomp.to_s
+#first_player = "Zeeshan"
 print " - Enter Player-name for Black: "
 second_player = gets.chomp.to_s
+#second_player = "Hamza"
 puts  #for line break
 
 player = [first_player, second_player]
 toggle_player = 1
+#byebug
 my_game = Chess.new player[0], player[1]
 is_first_turn = true
 begin
@@ -19,9 +23,8 @@ begin
   when 1
     print "\tEnter move (e.g, p=e2:e4): "
     move_input = gets.chomp.to_s
-    if my_game.move_piece move_input, player[toggle_player], is_first_turn
-      puts "\t Piece moved Successfully!"
-    end
+    my_game.move_piece move_input, player[toggle_player], is_first_turn
+
 
   when 2
     print "\tEnter game name to save: "
@@ -38,4 +41,5 @@ begin
 
   toggle_player = (toggle_player+1) % 2
   is_first_turn = !toggle_player.eql?(1)
+  puts "\n\n"
 end until my_game.get_players()[toggle_player].eliminated?

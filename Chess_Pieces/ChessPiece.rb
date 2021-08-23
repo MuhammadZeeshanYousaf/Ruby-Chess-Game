@@ -44,7 +44,7 @@ class ChessPiece
     # @type [ChessPiece] prev
     prev = board.get_box axis[:x_from], axis[:y_from]
     prev.white? ? board.set_box(axis[:x_to], axis[:y_to], prev.w) : board.set_box(axis[:x_to], axis[:y_to], prev.b)
-    board.set_box axis[:x_from], axis[:y_from], prev.blank
+    board.set_box axis[:x_from], axis[:y_from], ChessPiece.blank
   end
 
   def self.blank

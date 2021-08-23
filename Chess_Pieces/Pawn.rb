@@ -33,7 +33,7 @@ class Pawn < ChessPiece
   # returns (false || nil || dest_box_piece)
   def can_move?(from, to, board, is_first_turn)
     if is_first_turn
-      move_status = valid_move? from, to
+      move_status = valid_move? from, to, is_first_turn
       if !!move_status and !move_status.eql? "attack"
         move_to from, to, board
         true
@@ -43,6 +43,7 @@ class Pawn < ChessPiece
         false
       end
     end
+    false
   end
 
 end
