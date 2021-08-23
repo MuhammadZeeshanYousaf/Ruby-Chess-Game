@@ -36,7 +36,8 @@ class Knight < ChessPiece
     end
   end
 
-  def can_move(from, to, board)
+  # returns (false || nil || dest_box_piece)
+  def can_move?(from, to, board)
     super(from, to, board) do |_from, _to, _board, dest_box_piece|
       move_to _from, _to, _board
       dest_box_piece

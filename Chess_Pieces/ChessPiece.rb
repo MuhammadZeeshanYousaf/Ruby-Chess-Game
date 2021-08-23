@@ -10,6 +10,7 @@ class ChessPiece
   def b; end
   def valid_move?(from, to); false; end
 
+  # returns (false || nil || dest_box_piece)
   def can_move?(from, to, board)
     move_status = valid_move?(from, to)
     if !!move_status
