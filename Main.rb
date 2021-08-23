@@ -4,42 +4,62 @@ require_relative 'Chess'
 
 puts "Welcome to Chess Game!"
 print " - Enter Player-name for White: "
-first_player = gets.chomp.to_s
-#first_player = "Zeeshan"
+#first_player = gets.chomp.to_s
+first_player = "Zeeshan"
 print " - Enter Player-name for Black: "
-second_player = gets.chomp.to_s
-#second_player = "Hamza"
+#second_player = gets.chomp.to_s
+second_player = "Hamza"
 puts  #for line break
 
 player = [first_player, second_player]
 toggle_player = 1
 #byebug
-my_game = Chess.new player[0], player[1]
+chess_game = Chess.new player[0], player[1]
 is_first_turn = true
 begin
-  my_game.show_console player[toggle_player]
-  menue_input = gets.chomp.to_i
-  case menue_input
+  chess_game.show_console player[toggle_player]
+  menu_input = gets.chomp.to_i
+  puts ":::::::::::::::::::::::::::::::::::::::::::::::::"
+  case menu_input
   when 1
     print "\tEnter move (e.g, p=e2:e4): "
     move_input = gets.chomp.to_s
-    my_game.move_piece move_input, player[toggle_player], is_first_turn
-
+    is_moved = chess_game.move_piece move_input, player[toggle_player], is_first_turn
+    puts ">Move Status: #{is_moved}"
+    if is_moved.to_s[0].downcase.eql? 'k'
+      player[toggle_player].eliminate
+      puts " > Game Over ('#{player[(toggle_player+1) % 2]}' Won) <"
+    end
 
   when 2
     print "\tEnter game name to save: "
     save_name_input = gets.chomp.to_s
-    my_game.save_game save_name_input
+    saved_game_file = chess_game.save_game save_name_input
+    puts "> Game saved in file '#{saved_game_file}'"
 
   when 3
-    print "\t Do you want to Reset Game ? (y/n): "
+    print "\tEnter game name to delete: "
+    game_name = gets.chomp.to_s
+    is_deleted = chess_game.delete_game game_name
+    puts is_deleted ? "> Game successfully deleted." : "> Game '#{game_name}' does not exist."
+
+  when 4
+    print "\t Do you want to Reset Game? (y/n): "
     reset_input = gets.chomp.to_s
     if reset_input.downcase.eql? "y"
-      my_game.reset_game
+      chess_game.reset_game
     end
+
+  when 5
+    print "Do you want to exit game?  (y/n): "
+    do_exit = gets.chomp.to_s
+    do_exit.downcase == 'y' ? exit : nil
+
   end
+  puts ":::::::::::::::::::::::::::::::::::::::::::::::::"
 
   toggle_player = (toggle_player+1) % 2
   is_first_turn = !toggle_player.eql?(1)
-  puts "\n\n"
-end until my_game.get_players()[toggle_player].eliminated?
+  chess_game.flip_board
+  puts  #line break
+end until chess_game.get_players()[toggle_player].eliminated?

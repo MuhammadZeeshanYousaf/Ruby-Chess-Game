@@ -2,7 +2,7 @@ require_relative 'ChessPiece'
 
 class Bishop < ChessPiece
 
-  def initialize is_white
+  def initialize(is_white)
     super is_white
   end
 
@@ -11,7 +11,7 @@ class Bishop < ChessPiece
 
   def b; "B-b"; end
 
-  def valid_move? from, to
+  def valid_move?(from, to)
     if validate_pos(from, to)
       axis = get_axis from, to
       if valid_axis?(axis[:x_from], axis[:y_from], axis[:x_to], axis[:y_to])

@@ -66,58 +66,60 @@ class Chess
       else
         move_status = piece_to_move.can_move? prev_new_pos[0], prev_new_pos[1], @board
       end
-      if move_status == false
-        puts  "CANNOT MOVE PIECE"
-      elsif move_status == nil
-        puts "PIECE MOVED WITHOUT ANY ATTACK"
-      else
-        puts "PIECE MOVED BY ATTACKING ON #{move_status.to_s}"
-      end
+
+      # if move_status == false
+      #   puts  "CANNOT MOVE PIECE"
+      # elsif move_status == nil
+      #   puts "PIECE MOVED WITHOUT ANY ATTACK"
+      # else
+      #   puts "PIECE MOVED BY ATTACKING ON #{move_status.to_s}"
+      # end
     else; false; end
   end
 
+  def flip_board
+    @board.reverse_board
+  end
 
   def save_game(game_name)
     @load_game.export_game game_name, get_players, @board
   end
 
-  def load_game(game_name)
-    @load_game.import_game game_name
-    # to define -------
+  def delete_game(game_name)
+    @load_game.delete_game_file game_name
   end
 
   def reset_game
     @board = ChessBoard.new
-    player1_name = @player1.to_s
-    player2_name = @player2.to_s
-    @player1 = Player.new player1_name, true
-    @player2 = Player.new player2_name, false
+    player1_name = @white_player.to_s
+    player2_name = @black_player.to_s
+    @white_player = Player.new player1_name, true
+    @black_player = Player.new player2_name, false
     @console = ConsoleInterface.new
   end
 
-  #accessor methods
   def get_players
     [@white_player, @black_player]
   end
 
-  def show_console player
+  def show_console(player)
     @console.display_board @board
     @console.show_menu player
   end
 
-  #class methods
-  def self.require_piece(piece_name)
-    require_relative 'Chess_Pieces/' + piece_name
-  end
-
-  def self.require_all_pieces
-    self.require_piece 'ChessPiece'
-    self.require_piece 'Pawn'
-    self.require_piece 'Rook'
-    self.require_piece 'Knight'
-    self.require_piece 'Bishop'
-    self.require_piece 'Queen'
-    self.require_piece 'King'
-  end
+  # #class methods
+  # def self.require_piece(piece_name)
+  #   require_relative 'Chess_Pieces/' + piece_name
+  # end
+  #
+  # def self.require_all_pieces
+  #   self.require_piece 'ChessPiece'
+  #   self.require_piece 'Pawn'
+  #   self.require_piece 'Rook'
+  #   self.require_piece 'Knight'
+  #   self.require_piece 'Bishop'
+  #   self.require_piece 'Queen'
+  #   self.require_piece 'King'
+  # end
 
 end

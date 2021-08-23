@@ -2,7 +2,6 @@ class ChessPiece
 
   def initialize(is_white)
     @is_white = is_white
-    # @is_white, @is_killed = is_white, false
   end
 
   #@abstract methods
@@ -20,11 +19,11 @@ class ChessPiece
 
       if dest_box_piece != ChessPiece.blank
         unless dest_box_piece.white? and from_box_piece.white?
-          unless move_status.eql? "attack"
-            return yield(from, to, board, dest_box_piece)
-          else #after pawn attack
+          if move_status.eql? "attack" #after pawn attack
             move_to from, to, board
-            dest_box_piece
+            return dest_box_piece
+          else
+            return yield(from, to, board, dest_box_piece)
           end
         end
       elsif !move_status.eql? "attack"
@@ -38,8 +37,6 @@ class ChessPiece
   #defined methods
   # @param [ChessBoard] board
   def move_to(from, to, board)
-    #abstract method to implement every piece
-    #raise NoMethodError, "#{self.class} is not implemented in subclass. (Chess Piece not defined)"
     axis = get_axis from, to
     # @type [ChessPiece] prev
     prev = board.get_box axis[:x_from], axis[:y_from]
@@ -48,22 +45,12 @@ class ChessPiece
   end
 
   def self.blank
-    '___'
+    "___"
   end
 
   def white?
     @is_white
   end
-
-=begin
-  def killed?
-    @is_killed
-  end
-
-  def kill
-    @is_killed= true
-  end
-=end
 
   def set_white=(value)
     @is_white = value
@@ -71,7 +58,7 @@ class ChessPiece
 
   def validate_pos(from, to)
     pos_regex = /^[a-h][1-8]$/i
-    from =~ pos_regex and to =~ pos_regex
+    from =~ pos_regex && to =~ pos_regex
   end
 
   def valid_axis?(*coordinates)

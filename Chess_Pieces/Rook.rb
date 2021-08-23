@@ -37,8 +37,10 @@ class Rook < ChessPiece
       from_box_piece = board.get_box axis[:x_from], axis[:y_from]
       dest_box_piece = board.get_box axis[:x_to], axis[:y_to]
 
+      #puts "Dest: #{dest_box_piece} and From: #{from_box_piece}"
+
       if dest_box_piece != ChessPiece.blank
-        unless dest_box_piece.white? and from_box_piece.white?
+        unless dest_box_piece.white? && from_box_piece.white?
           if check_midway_piece axis[:x_from], axis[:y_from], axis[:x_to], axis[:y_to], board
             move_to from, to, board
             dest_box_piece

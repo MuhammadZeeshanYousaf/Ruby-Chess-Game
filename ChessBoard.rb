@@ -38,16 +38,22 @@ class ChessBoard
     @chess_board[row-1][col-1] = value
   end
 
+  def reverse_board
+    (@chess_board.length).times { |i|
+      @chess_board[i-1].reverse!
+    }
+  end
+
   # @param [Boolean] are_white
   def pieces(are_white)
     #return hash
-    { p: Pawn.new(are_white),
-      r: Rook.new(are_white),
-      n: Knight.new(are_white),
-      b: Bishop.new(are_white),
-      q: Queen.new(are_white),
-      k: King.new(are_white)
-    }
+    Hash[ p: Pawn.new(are_white),
+          r: Rook.new(are_white),
+          n: Knight.new(are_white),
+          b: Bishop.new(are_white),
+          q: Queen.new(are_white),
+          k: King.new(are_white)
+    ]
   end
 
 end

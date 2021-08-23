@@ -2,7 +2,7 @@ require_relative 'ChessPiece'
 
 class Pawn < ChessPiece
 
-  def initialize is_white
+  def initialize(is_white)
     super is_white
   end
 
@@ -20,12 +20,12 @@ class Pawn < ChessPiece
           if axis[:y_from] + 1 == axis[:y_to]
             if axis[:x_from] == axis[:x_to]; true
             elsif axis[:x_from]+1 == axis[:x_to] || axis[:x_from]-1 == axis[:x_to]; "attack"; end
-          else; false; end
+          else false; end
         elsif axis[:y_from] == 2 and is_first_turn
           return (axis[:y_from] + 1) == axis[:y_to] || (axis[:y_from] + 2) == axis[:y_to]
-        else; false; end
-      else; false; end
-    else; false; end
+        else false; end
+      else false; end
+    else false; end
   end
 
   # @param [ChessBoard] board
@@ -37,13 +37,12 @@ class Pawn < ChessPiece
       if !!move_status and !move_status.eql? "attack"
         move_to from, to, board
         true
-      end
+        else false; end
     else  #not a first turn
       super(from, to, board) do |_, _, _, _|
         false
       end
     end
-    false
   end
 
 end
