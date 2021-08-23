@@ -30,6 +30,7 @@ class Pawn < ChessPiece
 
   # @param [ChessBoard] board
   # @param [Boolean] is_first_turn
+  # returns (false || nil || dest_box_piece)
   def can_move?(from, to, board, is_first_turn)
     if is_first_turn
       move_status = valid_move? from, to

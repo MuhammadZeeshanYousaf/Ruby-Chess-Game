@@ -30,7 +30,7 @@ class Rook < ChessPiece
     end
   end
 
-  #return attacked piece or nil or false
+  # returns (false || nil || dest_box_piece)
   def can_move?(from, to, board)
     if valid_move? from, to
       axis = get_axis from, to
@@ -54,6 +54,7 @@ class Rook < ChessPiece
     false
   end
 
+  # @private
   def check_midway_piece(x_from, y_from, x_to, y_to, board)
 
     # @type [Integer] y_axis_diff
