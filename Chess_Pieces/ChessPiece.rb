@@ -7,21 +7,20 @@ class ChessPiece
   #@abstract methods
   def w; end
   def b; end
-  def valid_move?(from, to); false; end
 
   # returns (false || nil || dest_box_piece)
   def can_move?(from, to, board)
     move_status = valid_move?(from, to)
     if !!move_status
-      axis = get_axis from, to
-      from_box_piece = board.get_box axis[:x_from], axis[:y_from]
-      dest_box_piece = board.get_box axis[:x_to], axis[:y_to]
+      axis = get_axis(from, to)
+      from_box_piece = board.get_box(axis[:x_from], axis[:y_from])
+      dest_box_piece = board.get_box(axis[:x_to], axis[:y_to])
 
       if dest_box_piece != ChessPiece.blank
         unless dest_box_piece.white? and from_box_piece.white?
           if move_status.eql? "attack" #after pawn attack
             move_to from, to, board
-            return dest_box_piece
+            return dest_box_piece.to_s
           else
             return yield(from, to, board, dest_box_piece)
           end
@@ -40,7 +39,7 @@ class ChessPiece
     axis = get_axis from, to
     # @type [ChessPiece] prev
     prev = board.get_box axis[:x_from], axis[:y_from]
-    prev.white? ? board.set_box(axis[:x_to], axis[:y_to], prev.w) : board.set_box(axis[:x_to], axis[:y_to], prev.b)
+    board.set_box(axis[:x_to], axis[:y_to], prev)
     board.set_box axis[:x_from], axis[:y_from], ChessPiece.blank
   end
 
