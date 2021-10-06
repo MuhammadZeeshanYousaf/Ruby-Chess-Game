@@ -10,7 +10,6 @@ require_relative 'Chess_Pieces/Knight'
 class ChessBoard
   
   def initialize
-    #Chess.require_all_pieces
     @white = pieces true
     @black = pieces false
     @blank = ChessPiece.blank

@@ -17,14 +17,13 @@ class Chess
     #Player Class objects
     @white_player = Player.new(white_player_name, true)
     @black_player = Player.new(black_player_name, false)
-    #Chess.require_all_pieces
     @console = ConsoleInterface.new
     @board = ChessBoard.new
     @load_game = ManageGame.new
   end
 
   #move_string ( e.g. p=e2:e4 )
-  def move_piece(move_string, player_name, first_turn = false)
+  def move_piece(move_string, player_name, is_first_turn = false)
     if move_string =~ /^\s*[prnbqk]\s*=\s*[a-h][1-8]\s*:\s*[a-h][1-8]$/i
       #input is valid now
       piece_positions = move_string.split("=")
@@ -36,12 +35,12 @@ class Chess
       elsif @black_player.to_s.eql? player_name
         piece_to_move = ChessPiece.new @black_player.white?
       else
-        return false
+        raise ArgumentError, "(!) Player Name is invalid"
       end
 
-      is_pawn = false   #check if pawn is the piece to move
+      is_pawn = false   # checks if pawn is the piece to move
 
-      #get the piece to move
+      # get the piece to move
       case piece_positions[0].downcase
       when 'p'
         pawn_move = Pawn.new piece_to_move.white?
@@ -57,24 +56,17 @@ class Chess
       when 'k'
         piece_to_move = King.new piece_to_move.white?
       else
-        false
+        raise ArgumentError, "(!) Move should match given format"
       end
 
-      #start moving piece process
+      #start moving piece
       if is_pawn
-        move_status = pawn_move.can_move? prev_new_pos[0], prev_new_pos[1], @board, first_turn
+        move_status = pawn_move.can_move? prev_new_pos[0], prev_new_pos[1], @board, is_first_turn
       else
         move_status = piece_to_move.can_move? prev_new_pos[0], prev_new_pos[1], @board
       end
 
-      # if move_status == false
-      #   puts  "CANNOT MOVE PIECE"
-      # elsif move_status == nil
-      #   puts "PIECE MOVED WITHOUT ANY ATTACK"
-      # else
-      #   puts "PIECE MOVED BY ATTACKING ON #{move_status.to_s}"
-      # end
-    else; false; end
+    else raise ArgumentError, "(!) Move should match given format"; end
   end
 
   def flip_board
@@ -102,24 +94,17 @@ class Chess
     [@white_player, @black_player]
   end
 
+  def eliminate_player(player_name)
+    if @white_player.to_s === player_name
+      @white_player.eliminate
+    elsif @black_player.to_s === player_name
+      @black_player.eliminate
+    end
+  end
+
   def show_console(player)
     @console.display_board @board
     @console.show_menu player
   end
-
-  # #class methods
-  # def self.require_piece(piece_name)
-  #   require_relative 'Chess_Pieces/' + piece_name
-  # end
-  #
-  # def self.require_all_pieces
-  #   self.require_piece 'ChessPiece'
-  #   self.require_piece 'Pawn'
-  #   self.require_piece 'Rook'
-  #   self.require_piece 'Knight'
-  #   self.require_piece 'Bishop'
-  #   self.require_piece 'Queen'
-  #   self.require_piece 'King'
-  # end
 
 end
