@@ -4,30 +4,35 @@ require_relative 'Chess'
 
 puts "Welcome to Chess Game!"
 print " - Enter Player-name for White: "
-#first_player = gets.chomp.to_s
-first_player = "Zeeshan"
+first_player = gets.chomp.to_s
+# first_player = "Zeeshan"
 print " - Enter Player-name for Black: "
-#second_player = gets.chomp.to_s
-second_player = "Hamza"
+second_player = gets.chomp.to_s
+# second_player = "Hamza"
 puts  #for line break
 
 player = [first_player, second_player]
 toggle_player = 1
-#byebug
+
 chess_game = Chess.new player[0], player[1]
 is_first_turn = true
 begin
-  chess_game.show_console player[toggle_player]
+  chess_game.show_console chess_game.get_players[toggle_player].to_s
   menu_input = gets.chomp.to_i
   puts ":::::::::::::::::::::::::::::::::::::::::::::::::"
   case menu_input
   when 1
     print "\tEnter move (e.g, p=e2:e4): "
-    move_input = gets.chomp.to_s
-    is_moved = chess_game.move_piece move_input, player[toggle_player], is_first_turn
-    puts ">Move Status: #{is_moved}"
+    begin
+      move_input = gets.chomp.to_s
+      is_moved = chess_game.move_piece move_input, chess_game.get_players[toggle_player].to_s, is_first_turn
+    rescue ArgumentError => e
+      puts e.message
+      retry
+    end
+    puts "> Move Status: #{is_moved}"
     if is_moved.to_s[0].downcase.eql? 'k'
-      player[toggle_player].eliminate
+      chess_game.eliminate_player chess_game.get_players[toggle_player].to_s
       puts " > Game Over ('#{player[(toggle_player+1) % 2]}' Won) <"
     end
 

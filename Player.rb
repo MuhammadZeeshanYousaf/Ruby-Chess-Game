@@ -5,16 +5,6 @@ class Player
     @name = name
     @is_white = is_color_white
     @is_eliminated = false
-    # @pawns_killed = 0
-    # @pawns_live   = 8
-    # @rooks_killed = 0
-    # @rooks_live   = 2
-    # @knights_killed = 0
-    # @knights_live   = 2
-    # @bishops_killed = 2
-    # @bishops_live   = 2
-    # @queen_live = true
-    # @king_live  = true
   end
 
   def change_name=(value)
